@@ -1,0 +1,24 @@
+
+{
+  "top_styles": [
+    {"rank": 1, "style": "Botanical/Floral", "count": 247, "description": "Designs featuring flowers, leaves, botanical illustrations, and natural motifs", "examples": ["six bottles of elderflower and rose wine with floral designs", "white flowers and green leaves on black background", "pink and yellow flowers on white background"]},
+    {"rank": 2, "style": "Vintage/Traditional", "count": 156, "description": "Classic, nostalgic designs with ornate patterns, traditional typography, and heritage aesthetics", "examples": ["ornate design book covers", "vintage tin packaging", "traditional English tea canisters"]},
+    {"rank": 3, "style": "Minimalist/Clean", "count": 134, "description": "Simple, clean designs with lots of white space and minimal elements", "examples": ["white background bottle presentations", "simple geometric shapes", "clean typography layouts"]},
+    {"rank": 4, "style": "Luxury/Premium", "count": 89, "description": "High-end packaging with gold foil, ribbons, and sophisticated finishes", "examples": ["gold foil stamped cards", "ribbon-wrapped gift boxes", "premium canister designs"]},
+    {"rank": 5, "style": "Artisanal/Handcrafted", "count": 67, "description": "Hand-drawn illustrations, craft-inspired designs, and artisan aesthetics", "examples": ["hand-pressed notebook covers", "illustrated packaging", "craft paper designs"]}
+  ],
+  "top_products": [
+    {"rank": 1, "product": "Tea", "count": 98, "examples": ["tea canisters with ornate designs", "matcha powder packaging", "herbal tea tins"]},
+    {"rank": 2, "product": "Confectionery", "count": 87, "examples": ["chocolate boxes", "fudge packaging", "biscuit tins"]},
+    {"rank": 3, "product": "Beauty/Personal Care", "count": 76, "examples": ["soap bars with floral designs", "baby care products", "perfume bottles"]},
+    {"rank": 4, "product": "Wine/Spirits", "count": 54, "examples": ["wine bottles with decorative labels", "gin bottles with botanical designs", "craft cocktail packaging"]},
+    {"rank": 5, "product": "Candles", "count": 42, "examples": ["candle tins with floral motifs", "luxury candle packaging", "decorative candle boxes"]}
+  ],
+  "top_palettes": [
+    {"rank": 1, "name": "Neutral Whites", "colors": ["#ffffff", "#fdfefe", "#fcfcfc"], "count": 89, "mood": "Clean, pure, minimal"},
+    {"rank": 2, "name": "Warm Beiges", "colors": ["#e0d5c9", "#d8d1ca", "#cbc0b5"], "count": 76, "mood": "Elegant, sophisticated, timeless"},
+    {"rank": 3, "name": "Sage Greens", "colors": ["#a8bc8c", "#9b6e45", "#8c7770"], "count": 67, "mood": "Natural, organic, calming"},
+    {"rank": 4, "name": "Dusty Blues", "colors": ["#a9dae0", "#b1bad8", "#8791cb"], "count": 54, "mood": "Serene, traditional, trustworthy"},
+    {"rank": 5, "name": "Blush Pinks", "colors": ["#edbfb7", "#f8f2f2", "#e1597f"], "count": 43, "mood": "Romantic, feminine, gentle"}
+  ]
+}
