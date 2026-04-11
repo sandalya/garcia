@@ -1,10 +1,13 @@
-# SESSION — 2026-04-11 13:30
+# SESSION — 2026-04-11 15:27
 
 ## Проект
-sam
+garcia
 
 ## Що зробили
-додали inline-кнопки до /cur: внизу повідомлення рядок кнопок 1-5, тап відкриває деталі теми (як /cur_item N); пофіксили pattern у CallbackQueryHandler щоб включав cur_item
+Запустили Гарсіа: форк від Сема, base.py з персоною і Pinterest-аналізом, модуль analyze.py, виправили доступ для ADMIN_IDS, сервіс garcia.service активний
 
 ## Наступний крок
-наступне: —
+Переписати main.py щоб digest і onboarding також приймали ADMIN_IDS, додати /help команду
+
+## Контекст
+840 пінів з борду Ксюші проаналізовано: топ стиль Botanical/Floral, топ товар Tea, палітра Neutral Whites

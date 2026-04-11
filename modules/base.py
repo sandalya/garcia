@@ -9,41 +9,47 @@ BASE_DIR = Path(__file__).parent.parent
 def _load_ecosystem() -> str:
     p = BASE_DIR / "ECOSYSTEM.md"
     return p.read_text(encoding="utf-8") if p.exists() else ""
+
+def _load_pinterest_analysis() -> str:
+    p = BASE_DIR / "data" / "pinterest_analysis.json"
+    if not p.exists():
+        return ""
+    data = json.loads(p.read_text(encoding="utf-8"))
+    lines = ["Аналіз Pinterest-борду Ксюші (packaging):"]
+    for s in data.get("top_styles", []):
+        lines.append(f"Стиль #{s['rank']}: {s['style']} ({s['count']} пінів) — {s['description']}")
+    for p_ in data.get("top_products", []):
+        lines.append(f"Товар #{p_['rank']}: {p_['product']} ({p_['count']} пінів)")
+    for pal in data.get("top_palettes", []):
+        lines.append(f"Палітра #{pal['rank']}: {pal['name']} — {', '.join(pal['colors'])} — {pal['mood']}")
+    return "\n".join(lines)
+
 PROFILE_PATH = BASE_DIR / "profile.json"
 DATA_DIR = BASE_DIR / "data"
 DATA_DIR.mkdir(exist_ok=True)
 
 client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
 
-MODEL_SMART = "claude-sonnet-4-20250514"   # пошук, складні відповіді
-MODEL_FAST  = "claude-haiku-4-5-20251001"  # прості відповіді, curriculum, onboarding
+MODEL_SMART = "claude-sonnet-4-20250514"
+MODEL_FAST  = "claude-haiku-4-5-20251001"
 
-SAM_PERSONA = """
-Ти — Сем, персональний AI-асистент Саші. 
-Характер: як Samwise Gamgee — дбайливий, уважний, надійний — але без сором'язливості. Швидко орієнтуєшся, добре розумієш AI-світ, лаконічний і ефективний. Іноді жартуєш, але в міру — завжди по ділу.
+GARCIA_PERSONA = """
+Ти — Гарсіа, персональний асистент-аналітик Ксюші з навчання дизайну упаковки.
+Характер: уважна, точна, надихаюча. Допомагаєш увійти в нову професію — packaging artist.
 Поведінка:
-- Говориш як є, не лестиш і не пом'якшуєш якщо це не потрібно
-- Якщо тема нецікава або не важлива — прямо кажеш
-- Іноді сам пропонуєш що вивчити або на що звернути увагу
-- Відстежуєш контекст і настрій, підлаштовуєшся
-- Якщо впевнений що правий — відстоюєш свою думку
+- Говориш по-українськи, коротко і чітко
+- Знаєш смаки Ксюші через аналіз її Pinterest-борду
+- Даєш конкретні поради, приклади, ресурси
+- Підтримуєш і мотивуєш, але без лестощів
+- Коли аналізуєш роботи — спираєшся на її референси з борду
 - Мова: завжди українська
-- Стиль: коротко, чітко, з пропозиціями
 
-""" + _load_ecosystem()
-
+""" + _load_ecosystem() + "\n\n" + _load_pinterest_analysis()
 
 
 class BaseModule:
-    """
-    Базовий клас для модулів Sam.
-    Кожен модуль має доступ до профілю і клієнта Anthropic.
-    """
-
     def __init__(self, owner_chat_id: int):
         self.owner_chat_id = owner_chat_id
-
-    # ── Profile ────────────────────────────────────────────────────────────────
 
     def load_profile(self) -> dict:
         if PROFILE_PATH.exists():
@@ -67,8 +73,7 @@ class BaseModule:
         profile = self.load_profile()
         if not profile["scores"] and not profile["notes"]:
             return ""
-
-        lines = ["Профіль інтересів користувача (враховуй при підборі новин):"]
+        lines = ["Профіль інтересів Ксюші:"]
         if profile["scores"]:
             sorted_t = sorted(profile["scores"].items(), key=lambda x: x[1], reverse=True)
             top = [t for t, s in sorted_t if s > 0]
@@ -79,35 +84,29 @@ class BaseModule:
                 lines.append(f"Не цікаво: {', '.join(low[:5])}")
         if profile["notes"]:
             lines.append(f"Побажання: {'; '.join(profile['notes'][-5:])}")
-
         return "\n".join(lines)
 
-    # ── Claude API ─────────────────────────────────────────────────────────────
-
     def call_claude_with_search(self, prompt: str, max_tokens: int = 2000) -> str:
-        """Викликає Claude Sonnet з web_search (складні/актуальні теми)."""
         response = client.messages.create(
             model=MODEL_SMART,
             max_tokens=max_tokens,
-            system=[{"type": "text", "text": SAM_PERSONA, "cache_control": {"type": "ephemeral"}}],
+            system=[{"type": "text", "text": GARCIA_PERSONA, "cache_control": {"type": "ephemeral"}}],
             tools=[{"type": "web_search_20250305", "name": "web_search"}],
             messages=[{"role": "user", "content": prompt}],
         )
         return "\n".join(b.text for b in response.content if b.type == "text")
 
     def call_claude(self, prompt: str, max_tokens: int = 1024, smart: bool = False) -> str:
-        """Викликає Claude. smart=True → Sonnet, інакше Haiku (дешевше)."""
         model = MODEL_SMART if smart else MODEL_FAST
         response = client.messages.create(
             model=model,
             max_tokens=max_tokens,
-            system=[{"type": "text", "text": SAM_PERSONA, "cache_control": {"type": "ephemeral"}}],
+            system=[{"type": "text", "text": GARCIA_PERSONA, "cache_control": {"type": "ephemeral"}}],
             messages=[{"role": "user", "content": prompt}],
         )
         return "\n".join(b.text for b in response.content if b.type == "text")
 
     def parse_json_response(self, raw: str) -> list:
-        """Чистить і парсить JSON з відповіді Claude."""
         import re
         clean = raw.strip()
         if clean.startswith("```"):

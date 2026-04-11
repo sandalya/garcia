@@ -1,0 +1,15 @@
+[Unit]
+Description=Garcia — Packaging Design Assistant
+After=network.target
+
+[Service]
+Type=simple
+User=sashok
+WorkingDirectory=/home/sashok/.openclaw/workspace/garcia
+EnvironmentFile=/home/sashok/.openclaw/workspace/garcia/.env
+ExecStart=/home/sashok/.openclaw/workspace/garcia/venv/bin/python main.py
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
