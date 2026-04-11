@@ -46,7 +46,7 @@ async def cmd_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 async def handle_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if update.effective_user.id != OWNER_CHAT_ID:
+    if update.effective_user.id not in ADMIN_IDS and update.effective_user.id != OWNER_CHAT_ID:
         return
     user_text = update.message.text
     from modules.base import BaseModule
