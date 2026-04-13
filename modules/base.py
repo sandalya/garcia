@@ -42,3 +42,19 @@ class BaseModule(AgentBase):
 
     def call_claude(self, prompt: str, max_tokens: int = 1024, smart: bool = False) -> str:
         return super().call_claude(prompt, max_tokens=max_tokens, smart=smart)
+
+# Імпортуємо curriculum список для snapshot
+def _get_curriculum_list():
+    try:
+        from modules.curriculum import CURRICULUM
+        return CURRICULUM
+    except Exception:
+        return []
+
+_orig_snapshot = BaseModule._build_context_snapshot
+
+def _garcia_snapshot(self):
+    self.CURRICULUM = _get_curriculum_list()
+    return _orig_snapshot(self)
+
+BaseModule._build_context_snapshot = _garcia_snapshot

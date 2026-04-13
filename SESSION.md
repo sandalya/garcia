@@ -1,13 +1,13 @@
-# SESSION — 2026-04-11 15:49
+# SESSION — 2026-04-13 13:52
 
 ## Проект
 garcia
 
 ## Що зробили
-Гарсіа повністю запущена: analyze, onboarding (packaging), curriculum (7 кроків), digest з автовідправкою о 9:00 для ADMIN_IDS, персона Пенелопи Гарсіа, менюшка команд
+фікс tmp_path з timestamp — тепер всі фото в media_group зберігаються окремо і Гарсіа бачить кожне
 
 ## Наступний крок
-Додати колажі по стилям (зображення через web_search + InputMediaPhoto), переписати digest під packaging тематику
+за потреби портувати photo handling в Sam
 
 ## Контекст
-Pinterest аналіз: 840 пінів, топ Botanical/Floral, Tea, Neutral Whites палітра
+проблема була в garcia_photo_{user_id}.jpg — перезаписувався; фікс: garcia_photo_{user_id}_{timestamp}.jpg
