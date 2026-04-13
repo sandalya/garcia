@@ -1,13 +1,13 @@
-# SESSION — 2026-04-13 13:52
+# SESSION — 2026-04-13 13:59
 
 ## Проект
 garcia
 
 ## Що зробили
-фікс tmp_path з timestamp — тепер всі фото в media_group зберігаються окремо і Гарсіа бачить кожне
+photo handling повністю працює: media_group буфер, multi-image, timestamp в tmp_path; auto-save референсів під капотом через _maybe_save_references (haiku вирішує save/no)
 
 ## Наступний крок
-за потреби портувати photo handling в Sam
+перевірити data/references/ через час щоб побачити що Гарсіа зберігає
 
 ## Контекст
-проблема була в garcia_photo_{user_id}.jpg — перезаписувався; фікс: garcia_photo_{user_id}_{timestamp}.jpg
+save logic: після кожного _vision_reply окремий haiku запит JSON {save,name}; зберігає в garcia/data/references/

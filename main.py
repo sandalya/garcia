@@ -140,6 +140,41 @@ async def _vision_reply(paths: list, caption: str, system: str) -> str:
     )
     return resp.content[0].text if resp.content else ""
 
+async def _maybe_save_references(paths: list, caption: str, analysis: str):
+    """Гарсіа сама вирішує чи зберегти фото як навчальний референс."""
+    import anthropic, os, shutil
+    from pathlib import Path
+    ref_dir = Path("/home/sashok/.openclaw/workspace/garcia/data/references")
+    ref_dir.mkdir(parents=True, exist_ok=True)
+    ai = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+    prompt = f"""Ти аналізуєш фото яке надіслала Ксю в чат навчання дизайну упаковки.
+Аналіз фото: {analysis[:500]}
+Підпис: {caption or 'немає'}
+
+Чи варто зберегти це фото як навчальний референс для майбутнього? 
+Зберігати варто: приклади упаковки, палітри, типографіку, верстку, референси стилю.
+Не варто: особисті фото людей, меми, випадкові знімки без дизайнерської цінності.
+
+Відповідь ТІЛЬКИ у форматі JSON: {{"save": true/false, "name": "коротка_назва_латиницею"}}"""
+    try:
+        resp = ai.messages.create(
+            model="claude-haiku-4-5-20251001",
+            max_tokens=100,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        import json
+        data = json.loads(resp.content[0].text.strip())
+        if data.get("save"):
+            name = data.get("name", "reference")[:40]
+            import time as _t
+            ts = int(_t.time())
+            for i, src in enumerate(paths):
+                suffix = Path(src).suffix or ".jpg"
+                dst = ref_dir / f"{name}_{ts}_{i}{suffix}"
+                shutil.copy2(src, dst)
+    except Exception as e:
+        logger.warning(f"_maybe_save_references: {e}")
+
 async def _flush_mg(media_group_id: str):
     await _asyncio.sleep(1.5)
     buf = _mg_buffers.pop(media_group_id, None)
@@ -150,6 +185,8 @@ async def _flush_mg(media_group_id: str):
     system = digest._build_system(include_memory=True, include_conversation=False)
     resp = await _vision_reply(buf["paths"], buf["caption"], system)
     await update.message.reply_text(resp or "Не змогла відповісти, спробуй ще раз.")
+    if resp:
+        _asyncio.get_event_loop().create_task(_maybe_save_references(buf["paths"], buf["caption"], resp))
 
 async def _add_to_mg(mg_id: str, path: str, caption: str, uid: int, update):
     if mg_id in _mg_buffers:
@@ -178,6 +215,8 @@ async def handle_photo(update, context):
         system = digest._build_system(include_memory=True, include_conversation=False)
         resp = await _vision_reply([path], caption, system)
         await update.message.reply_text(resp or "Не змогла відповісти, спробуй ще раз.")
+        if resp:
+            _asyncio.get_event_loop().create_task(_maybe_save_references([path], caption, resp))
 
 async def handle_document(update, context):
     if update.effective_user.id not in ADMIN_IDS and update.effective_user.id != OWNER_CHAT_ID:
