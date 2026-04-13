@@ -1,8 +1,13 @@
+"""
+Garcia — персональний beauty-асистент Ксю.
+Agentic loop: Garcia сама вирішує що робити з кожним повідомленням.
+"""
 import os
 import asyncio
-from datetime import time
-from zoneinfo import ZoneInfo
 import logging
+import tempfile
+import base64
+from pathlib import Path
 from telegram import Update
 from telegram.ext import (
     Application,
@@ -10,87 +15,37 @@ from telegram.ext import (
     MessageHandler,
     filters,
     ContextTypes,
-    CallbackQueryHandler,
 )
-from modules.digest import DigestModule
-from modules.onboarding import OnboardingModule
-from modules.analyze import AnalyzeModule
-from modules.curriculum import cmd_curriculum, cmd_done, handle_curriculum_callback
-from modules.podcast import cmd_podcast
-from modules.notebooklm import cmd_notebooks
-from modules.catchup import CatchupModule
 
-import tempfile
-import base64
-import anthropic
-import tempfile
-import base64
-import anthropic
 import sys as _sys
 _sys.path.insert(0, os.path.expanduser("~/.openclaw/workspace"))
 from shared.logger import setup_logging
 setup_logging(agent="garcia")
 logger = logging.getLogger("garcia")
 
+from modules.brain import GarciaBrain
+
 TELEGRAM_TOKEN = os.environ["TELEGRAM_TOKEN"]
 OWNER_CHAT_ID = int(os.environ["OWNER_CHAT_ID"])
 ADMIN_IDS = [int(x) for x in os.environ.get("ADMIN_IDS", "").split(",") if x]
 
-digest = DigestModule(owner_chat_id=OWNER_CHAT_ID)
-DIGEST_RECIPIENT_ID = 255525  # тільки Ксюша
-digest_recipients = [DigestModule(owner_chat_id=DIGEST_RECIPIENT_ID)]
-onboarding = OnboardingModule(owner_chat_id=OWNER_CHAT_ID)
-analyze = AnalyzeModule(owner_chat_id=OWNER_CHAT_ID)
-catchup = CatchupModule(owner_chat_id=OWNER_CHAT_ID)
+brain = GarciaBrain()
 
-CATCHUP_PERIODS = {"3d": 3, "7d": 7, "14d": 14, "30d": 30, "60d": 60, "180d": 180, "365d": 365}
+BUFFER_WAIT = 3.5
+_buffers: dict[int, dict] = {}
 
-
-async def cmd_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    await update.message.reply_text(
-        "👋 Привіт, я Гарсіа — твій асистент з packaging design!\n\n"
-        "Що вмію:\n"
-        "🔍 /analyze — аналіз твого Pinterest-борду\n"
-        "📚 /onboarding — що таке packaging artist і як починати\n"
-        "🗺 /cur — навчальний план\n"
-        "✅ /done <N> — позначити тему виконаною\n"
-        "🎧 /podcast [N] [deep] — аудіо-епізод по темі\n"
-        "📓 /notebooks — мої NotebookLM notebooks\n"
-        "📰 /digest — дайджест новин packaging design\n"
-        "🗓 /catchup [7d|30d|...] — ретроспектива новин\n\n"
-        "Або просто пиши — відповім!"
-    )
+MIME_MAP = {
+    ".jpg": "image/jpeg", ".jpeg": "image/jpeg",
+    ".png": "image/png", ".webp": "image/webp",
+    ".heic": "image/jpeg", ".heif": "image/jpeg",
+}
 
 
-async def cmd_catchup(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    arg = (context.args[0] if context.args else "7d").lower()
-    days = CATCHUP_PERIODS.get(arg, 7)
-    await catchup.send_catchup(update, days)
+def _is_authorized(user_id: int) -> bool:
+    return user_id in ADMIN_IDS or user_id == OWNER_CHAT_ID
 
 
-PROFILE_KEYWORDS = ["профайл", "профіл", "profile", "фрілансер", "freelancer", "upwork", "behance", "dribbble"]
-
-
-def _is_profile_request(text: str) -> bool:
-    t = text.lower()
-    return any(k in t for k in PROFILE_KEYWORDS)
-
-
-async def handle_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if update.effective_user.id not in ADMIN_IDS and update.effective_user.id != OWNER_CHAT_ID:
-        return
-    await update.message.chat.send_action("typing")
-    text = update.message.text
-    if _is_profile_request(text):
-        response = digest.call_claude_profiles(text)
-    else:
-        response = digest.call_claude_chat(text, max_tokens=1500)
-    await update.message.reply_text(response or "Не змогла відповісти, спробуй ще раз.")
-
-
-async def _download_photo(update, context, user_id: int):
-    from pathlib import Path
-    import os, tempfile
+async def _download_photo(update: Update, context: ContextTypes.DEFAULT_TYPE, user_id: int) -> str | None:
     msg = update.message
     if msg.photo:
         suffix = ".jpg"
@@ -100,173 +55,208 @@ async def _download_photo(update, context, user_id: int):
         file_id = msg.document.file_id
     else:
         return None
-    import os, tempfile
-    file = await context.bot.get_file(file_id)
     import time as _t
-    tmp_path = os.path.join(tempfile.gettempdir(), f"garcia_photo_{user_id}_{int(_t.time()*1000)}{suffix}")
+    file = await context.bot.get_file(file_id)
+    tmp_path = os.path.join(tempfile.gettempdir(), f"garcia_{user_id}_{int(_t.time()*1000)}{suffix}")
     await file.download_to_drive(tmp_path)
     return tmp_path
 
 
-import asyncio as _asyncio
-_mg_buffers: dict = {}
+async def _get_reply_images(update: Update, context: ContextTypes.DEFAULT_TYPE, user_id: int) -> list:
+    reply = update.message.reply_to_message
+    if not reply:
+        return []
+    paths = []
+    if reply.document and reply.document.mime_type and reply.document.mime_type.startswith("image/"):
+        file = await context.bot.get_file(reply.document.file_id)
+        suffix = Path(reply.document.file_name).suffix if reply.document.file_name else ".png"
+        import time as _t
+        tmp_path = os.path.join(tempfile.gettempdir(), f"garcia_reply_{user_id}_0{suffix}")
+        await file.download_to_drive(tmp_path)
+        paths.append(tmp_path)
+    elif reply.photo:
+        file = await context.bot.get_file(reply.photo[-1].file_id)
+        import time as _t
+        tmp_path = os.path.join(tempfile.gettempdir(), f"garcia_reply_{user_id}_0.jpg")
+        await file.download_to_drive(tmp_path)
+        paths.append(tmp_path)
+    return paths
 
-async def _vision_reply(paths: list, caption: str, system: str) -> str:
-    import base64, anthropic, os
-    from pathlib import Path
-    MIME = {".jpg": "image/jpeg", ".jpeg": "image/jpeg",
-            ".png": "image/png", ".webp": "image/webp",
-            ".heic": "image/jpeg", ".heif": "image/jpeg"}
-    ai = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
-    content = []
-    if caption:
-        content.append({"type": "text", "text": caption})
+
+def _paths_to_image_data(paths: list) -> list:
+    image_data = []
     for img_path in paths:
         try:
             raw = Path(img_path).read_bytes()
             suffix = Path(img_path).suffix.lower()
-            mime = MIME.get(suffix, "image/jpeg")
+            mime = MIME_MAP.get(suffix, "image/jpeg")
             b64 = base64.standard_b64encode(raw).decode()
-            content.append({"type": "image", "source": {"type": "base64", "media_type": mime, "data": b64}})
+            image_data.append({
+                "type": "image",
+                "source": {"type": "base64", "media_type": mime, "data": b64}
+            })
         except Exception as e:
-            logger.warning(f"_vision_reply skip {img_path}: {e}")
-    if not content:
-        return ""
-    resp = ai.messages.create(
-        model="claude-sonnet-4-20250514",
-        max_tokens=1500,
-        system=system,
-        messages=[{"role": "user", "content": content}],
-    )
-    return resp.content[0].text if resp.content else ""
+            logger.warning(f"Skip image {img_path}: {e}")
+    return image_data
 
-async def _maybe_save_references(paths: list, caption: str, analysis: str):
-    """Гарсіа сама вирішує чи зберегти фото як навчальний референс."""
-    import anthropic, os, shutil
-    from pathlib import Path
-    ref_dir = Path("/home/sashok/.openclaw/workspace/garcia/data/references")
-    ref_dir.mkdir(parents=True, exist_ok=True)
-    ai = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
-    prompt = f"""Ти аналізуєш фото яке надіслала Ксю в чат навчання дизайну упаковки.
-Аналіз фото: {analysis[:500]}
-Підпис: {caption or 'немає'}
 
-Чи варто зберегти це фото як навчальний референс для майбутнього? 
-Зберігати варто: приклади упаковки, палітри, типографіку, верстку, референси стилю.
-Не варто: особисті фото людей, меми, випадкові знімки без дизайнерської цінності.
+def _cancel_buffer(user_id: int):
+    if user_id in _buffers and _buffers[user_id].get("task"):
+        _buffers[user_id]["task"].cancel()
 
-Відповідь ТІЛЬКИ у форматі JSON: {{"save": true/false, "name": "коротка_назва_латиницею"}}"""
-    try:
-        resp = ai.messages.create(
-            model="claude-haiku-4-5-20251001",
-            max_tokens=100,
-            messages=[{"role": "user", "content": prompt}],
-        )
-        import json
-        data = json.loads(resp.content[0].text.strip())
-        if data.get("save"):
-            name = data.get("name", "reference")[:40]
-            import time as _t
-            ts = int(_t.time())
-            for i, src in enumerate(paths):
-                suffix = Path(src).suffix or ".jpg"
-                dst = ref_dir / f"{name}_{ts}_{i}{suffix}"
-                shutil.copy2(src, dst)
-    except Exception as e:
-        logger.warning(f"_maybe_save_references: {e}")
 
-async def _flush_mg(media_group_id: str):
-    await _asyncio.sleep(1.5)
-    buf = _mg_buffers.pop(media_group_id, None)
+async def _flush_buffer(user_id: int):
+    await asyncio.sleep(BUFFER_WAIT)
+    buf = _buffers.pop(user_id, None)
     if not buf:
         return
     update = buf["update"]
-    await update.message.chat.send_action("typing")
-    system = digest._build_system(include_memory=True, include_conversation=False)
-    resp = await _vision_reply(buf["paths"], buf["caption"], system)
-    await update.message.reply_text(resp or "Не змогла відповісти, спробуй ще раз.")
-    if resp:
-        _asyncio.get_event_loop().create_task(_maybe_save_references(buf["paths"], buf["caption"], resp))
-
-async def _add_to_mg(mg_id: str, path: str, caption: str, uid: int, update):
-    if mg_id in _mg_buffers:
-        _mg_buffers[mg_id]["paths"].append(path)
-        if caption and not _mg_buffers[mg_id]["caption"]:
-            _mg_buffers[mg_id]["caption"] = caption
-        _mg_buffers[mg_id]["task"].cancel()
-    else:
-        _mg_buffers[mg_id] = {"paths": [path], "caption": caption, "uid": uid, "update": update, "task": None}
-    task = _asyncio.get_event_loop().create_task(_flush_mg(mg_id))
-    _mg_buffers[mg_id]["task"] = task
-
-async def handle_photo(update, context):
-    if update.effective_user.id not in ADMIN_IDS and update.effective_user.id != OWNER_CHAT_ID:
+    text = buf.get("text", "").strip()
+    paths = buf.get("image_paths", [])
+    if not text and not paths:
         return
-    uid = update.effective_user.id
-    path = await _download_photo(update, context, uid)
+    await update.message.chat.send_action("typing")
+    image_data = _paths_to_image_data(paths) if paths else None
+    if not text and image_data:
+        text = "Що скажеш про це фото?"
+    loop = asyncio.get_event_loop()
+    try:
+        response = await loop.run_in_executor(None, brain.run, text, image_data)
+    except Exception as e:
+        logger.error(f"Brain error: {e}")
+        response = "Вибач, щось пішло не так 💛 Спробуй ще раз."
+    if not response:
+        response = "Хм, не змогла відповісти. Спробуй переформулювати? 🤔"
+    for i in range(0, len(response), 4000):
+        chunk = response[i:i+4000]
+        await update.message.reply_text(chunk)
+
+
+async def _add_to_buffer(user_id: int, update: Update, text: str = "", image_path: str = None):
+    _cancel_buffer(user_id)
+    buf = _buffers.setdefault(user_id, {})
+    if text:
+        buf["text"] = (buf.get("text", "") + "\\n" + text).strip()
+    if image_path:
+        paths = buf.get("image_paths", [])
+        if image_path not in paths:
+            paths.append(image_path)
+        buf["image_paths"] = paths
+    buf["update"] = update
+    task = asyncio.create_task(_flush_buffer(user_id))
+    buf["task"] = task
+
+
+async def cmd_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(
+        "💄 Привіт! Я Гарсіа — твій персональний beauty-асистент!\\n\\n"
+        "Що я вмію:\\n"
+        "🎨 Визначити твій колірний тип — просто скинь фото\\n"
+        "💋 Підібрати макіяж під твою зовнішність\\n"
+        "📝 Покрокові інструкції для будь-якого образу\\n"
+        "🛍 Порекомендувати якісну косметику\\n"
+        "✨ Підказати зачіски і колір волосся\\n\\n"
+        "Просто пиши або кидай фото — я розберуся! 💛\\n\\n"
+        "Команди:\\n"
+        "/start — ця підказка\\n"
+        "/reset — очистити історію розмови\\n"
+        "/cost — скільки коштувала ця сесія\\n"
+        "/profile — що я про тебе знаю"
+    )
+
+
+async def cmd_reset(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not _is_authorized(update.effective_user.id):
+        return
+    brain.reset_history()
+    await update.message.reply_text("🔄 Історію очищено! Починаємо з чистого аркуша 💛")
+
+
+async def cmd_cost(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not _is_authorized(update.effective_user.id):
+        return
+    await update.message.reply_text(brain.get_cost_summary())
+
+
+async def cmd_profile(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not _is_authorized(update.effective_user.id):
+        return
+    import json
+    from modules.base import PROFILE_PATH
+    try:
+        profile = json.loads(PROFILE_PATH.read_text(encoding="utf-8"))
+        ca = profile.get("color_analysis", {})
+        skin = profile.get("skin", {})
+        mu = profile.get("makeup", {})
+        products = profile.get("products", {})
+        lines = ["👤 *Профіль Ксю*\\n"]
+        if ca.get("skin_tone"):
+            lines.append(f"🎨 Колірний тип: {ca.get('season_type', '?')}")
+            lines.append(f"   Скінтон: {ca['skin_tone']}, підтон: {ca.get('skin_undertone', '?')}")
+            lines.append(f"   Очі: {ca.get('eye_color', '?')}, волосся: {ca.get('hair_color', '?')}")
+        else:
+            lines.append("🎨 Колірний тип: ще не визначено (скинь фото!)")
+        lines.append(f"\\n💆 Шкіра: {skin.get('type', 'не визначено')}")
+        if skin.get("concerns"):
+            lines.append(f"   Проблеми: {', '.join(skin['concerns'])}")
+        lines.append(f"\\n💄 Рівень: {mu.get('level', 'beginner')}")
+        if mu.get("favorite_looks"):
+            lines.append(f"   Улюблені образи: {', '.join(mu['favorite_looks'])}")
+        if products.get("owned"):
+            lines.append(f"\\n🛍 Косметичка: {', '.join(products['owned'][:5])}")
+            if len(products['owned']) > 5:
+                lines.append(f"   ...і ще {len(products['owned']) - 5}")
+        await update.message.reply_text("\\n".join(lines), parse_mode="Markdown")
+    except Exception as e:
+        await update.message.reply_text(f"Помилка читання профілю: {e}")
+
+
+async def handle_text(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not _is_authorized(update.effective_user.id):
+        return
+    text = update.message.text
+    user_id = update.effective_user.id
+    reply_images = await _get_reply_images(update, context, user_id)
+    for path in reply_images:
+        await _add_to_buffer(user_id, update, image_path=path)
+    await _add_to_buffer(user_id, update, text=text)
+
+
+async def handle_photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not _is_authorized(update.effective_user.id):
+        return
+    user_id = update.effective_user.id
+    path = await _download_photo(update, context, user_id)
     if not path:
         return
     caption = (update.message.caption or "").strip()
-    mg_id = update.message.media_group_id
-    if mg_id:
-        await _add_to_mg(mg_id, path, caption, uid, update)
-    else:
-        await update.message.chat.send_action("typing")
-        system = digest._build_system(include_memory=True, include_conversation=False)
-        resp = await _vision_reply([path], caption, system)
-        await update.message.reply_text(resp or "Не змогла відповісти, спробуй ще раз.")
-        if resp:
-            _asyncio.get_event_loop().create_task(_maybe_save_references([path], caption, resp))
+    await _add_to_buffer(user_id, update, text=caption, image_path=path)
 
-async def handle_document(update, context):
-    if update.effective_user.id not in ADMIN_IDS and update.effective_user.id != OWNER_CHAT_ID:
+
+async def handle_document(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    if not _is_authorized(update.effective_user.id):
         return
     doc = update.message.document
     if not (doc and doc.mime_type and doc.mime_type.startswith("image/")):
         return
-    uid = update.effective_user.id
-    path = await _download_photo(update, context, uid)
+    user_id = update.effective_user.id
+    path = await _download_photo(update, context, user_id)
     if not path:
         return
     caption = (update.message.caption or "").strip()
-    mg_id = update.message.media_group_id
-    if mg_id:
-        await _add_to_mg(mg_id, path, caption, uid, update)
-    else:
-        await update.message.chat.send_action("typing")
-        system = digest._build_system(include_memory=True, include_conversation=False)
-        resp = await _vision_reply([path], caption, system)
-        await update.message.reply_text(resp or "Не змогла відповісти, спробуй ще раз.")
+    await _add_to_buffer(user_id, update, text=caption, image_path=path)
+
 
 def main():
     app = Application.builder().token(TELEGRAM_TOKEN).build()
-
     app.add_handler(CommandHandler("start", cmd_start))
-    app.add_handler(CommandHandler("analyze", analyze.cmd_analyze))
-    app.add_handler(CommandHandler("onboarding", lambda u, c: onboarding.send_menu(u)))
-    app.add_handler(CommandHandler("digest", lambda u, c: digest.send(u)))
-    app.add_handler(CommandHandler("cur", cmd_curriculum))
-    app.add_handler(CommandHandler("done", cmd_done))
-    app.add_handler(CommandHandler("podcast", cmd_podcast))
-    app.add_handler(CommandHandler("notebooks", cmd_notebooks))
-    app.add_handler(CommandHandler("catchup", cmd_catchup))
-    app.add_handler(CallbackQueryHandler(handle_curriculum_callback, pattern="^cur_"))
-    app.add_handler(CallbackQueryHandler(onboarding.handle_callback, pattern="^onb_"))
+    app.add_handler(CommandHandler("reset", cmd_reset))
+    app.add_handler(CommandHandler("cost", cmd_cost))
+    app.add_handler(CommandHandler("profile", cmd_profile))
     app.add_handler(MessageHandler(filters.PHOTO, handle_photo))
     app.add_handler(MessageHandler(filters.Document.IMAGE, handle_document))
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_text))
-
-    logger.info("Garcia started")
-
-    async def daily_digest(ctx):
-        for d in digest_recipients:
-            await d.send(ctx.application)
-
-    app.job_queue.run_daily(
-        daily_digest,
-        time=time(hour=9, minute=0, tzinfo=ZoneInfo("Europe/Kiev"))
-    )
-
+    logger.info("Garcia beauty assistant started")
     app.run_polling()
 
 

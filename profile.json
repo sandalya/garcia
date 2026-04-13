@@ -1,9 +1,59 @@
 {
-  "scores": {
-    "llm_models": 1,
-    "mcp_integration": 1,
-    "agents_adoption": 1,
-    "agents_usecase": 2
+  "user": {
+    "name": "Ксю",
+    "name_forms": {
+      "nominative": "Ксю",
+      "genitive": "Ксю",
+      "dative": "Ксю",
+      "accusative": "Ксю",
+      "instrumental": "Ксю",
+      "vocative": "Ксю"
+    }
   },
-  "notes": []
+  "color_analysis": {
+    "skin_tone": "light neutral-cool",
+    "skin_undertone": "cool pink",
+    "eye_color": "green-grey",
+    "hair_color": null,
+    "season_type": "Cool Summer",
+    "best_colors": [],
+    "avoid_colors": [],
+    "analyzed_at": null,
+    "photo_ref": null,
+    "seasonal_type": "Light Summer"
+  },
+  "skin": {
+    "type": null,
+    "concerns": [],
+    "sensitivities": []
+  },
+  "makeup": {
+    "level": "beginner",
+    "comfort_zones": [],
+    "want_to_learn": [],
+    "favorite_looks": [],
+    "daily_routine": null
+  },
+  "products": {
+    "owned": [],
+    "wishlist": [],
+    "favorites": [],
+    "allergies": []
+  },
+  "preferences": {
+    "style": [],
+    "budget": null,
+    "brands_like": [],
+    "brands_avoid": []
+  },
+  "pinterest": {
+    "board_url": null,
+    "analysis": null,
+    "analyzed_at": null
+  },
+  "history": {
+    "looks_tried": [],
+    "recommendations_given": [],
+    "last_interaction": null
+  }
 }

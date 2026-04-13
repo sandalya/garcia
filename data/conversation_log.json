@@ -1,0 +1,29 @@
+[
+  {
+    "user_message": "\\nпривіт",
+    "has_photo": false,
+    "steps": 1,
+    "tools_used": [
+      "fast_path"
+    ],
+    "input_tokens": 2767,
+    "output_tokens": 75,
+    "cost_usd": 0.009426,
+    "response_len": 148,
+    "timestamp": "2026-04-13T18:57:20.845444"
+  },
+  {
+    "user_message": "\\nЯку помаду порадиш?",
+    "has_photo": false,
+    "steps": 3,
+    "tools_used": [
+      "read_profile",
+      "search_products"
+    ],
+    "input_tokens": 22780,
+    "output_tokens": 564,
+    "cost_usd": 0.0768,
+    "response_len": 860,
+    "timestamp": "2026-04-13T18:58:23.496890"
+  }
+]
