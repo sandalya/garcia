@@ -1,13 +1,13 @@
-# SESSION — 2026-04-13 18:59
+# SESSION — 2026-04-13 19:03
 
 ## Проект
 garcia
 
 ## Що зробили
-Повна переробка Garcia: packaging→beauty assistant. Agentic loop (brain.py з tools: search_products/tutorials/trends, read/update_profile, read_pinterest, analyze_photo). Нова персона Пенелопи Гарсіа без cringe. Новий profile.json під beauty (color_analysis, skin, makeup, products). Abby-style буфер. Fast path для простих повідомлень. Quality log (data/conversation_log.json) з cost per message. MAX_STEPS=8.
+Повна переробка Garcia: packaging→beauty assistant. Agentic loop (brain.py: tools search_products/tutorials/trends, read/update_profile, read_pinterest, analyze_photo). Нова персона Пенелопи Гарсіа (без cringe, звертання Ксю). Новий profile.json під beauty. Abby-style буфер 3.5с. Fast path для простих повідомлень. Quality log data/conversation_log.json з cost per message. MAX_STEPS=8. Roadmap записано в Kit TASKS.md і garcia/SESSION.md
 
 ## Наступний крок
-Тестування з Ксюшею: колірний аналіз з реальним фото, покрокові інструкції макіяжу, Pinterest beauty борд скрейпінг
+До 20.04: зібрати фідбек Ксюші, переглянути conversation_log, прибрати старі модулі, скрейпнути Pinterest beauty борд
 
 ## Контекст
-Profile вже має: skin_tone=light neutral-cool, undertone=cool pink, eyes=green-grey, season=Cool Summer. Старі модулі (curriculum/digest/catchup/onboarding/science/podcast) ще в папці але не підключені в main.py. Бекап: garcia_backup_20260413
+Profile: skin_tone=light neutral-cool, undertone=cool pink, eyes=green-grey, season=Cool Summer. Бекап: garcia_backup_20260413. Старі модулі не підключені але ще в папці
