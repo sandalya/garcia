@@ -87,9 +87,20 @@ def _paths_to_image_data(paths: list) -> list:
     image_data = []
     for img_path in paths:
         try:
-            raw = Path(img_path).read_bytes()
             suffix = Path(img_path).suffix.lower()
-            mime = MIME_MAP.get(suffix, "image/jpeg")
+            if suffix in (".heic", ".heif"):
+                from pillow_heif import register_heif_opener
+                from PIL import Image
+                import io
+                register_heif_opener()
+                img = Image.open(img_path).convert("RGB")
+                buf = io.BytesIO()
+                img.save(buf, format="JPEG")
+                raw = buf.getvalue()
+                mime = "image/jpeg"
+            else:
+                raw = Path(img_path).read_bytes()
+                mime = MIME_MAP.get(suffix, "image/jpeg")
             b64 = base64.standard_b64encode(raw).decode()
             image_data.append({
                 "type": "image",

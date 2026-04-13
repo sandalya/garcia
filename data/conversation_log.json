@@ -25,5 +25,42 @@
     "cost_usd": 0.0768,
     "response_len": 860,
     "timestamp": "2026-04-13T18:58:23.496890"
+  },
+  {
+    "user_message": "Що скажеш про це фото?",
+    "has_photo": true,
+    "steps": 2,
+    "tools_used": [],
+    "input_tokens": 15159,
+    "output_tokens": 469,
+    "cost_usd": 0.052512,
+    "response_len": 844,
+    "timestamp": "2026-04-13T19:37:29.460416"
+  },
+  {
+    "user_message": "",
+    "has_photo": false,
+    "steps": 1,
+    "tools_used": [
+      "fast_path"
+    ],
+    "input_tokens": 27056,
+    "output_tokens": 877,
+    "cost_usd": 0.094323,
+    "response_len": 721,
+    "timestamp": "2026-04-13T19:37:33.820881"
+  },
+  {
+    "user_message": "\\nanalyze this photo and tell me my exact skintone shade, undertones (cool, warm, neutral), and the best color palette for clothing based on this tone",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "analyze_photo"
+    ],
+    "input_tokens": 34737,
+    "output_tokens": 1299,
+    "cost_usd": 0.123696,
+    "response_len": 859,
+    "timestamp": "2026-04-13T19:37:44.528470"
   }
 ]
