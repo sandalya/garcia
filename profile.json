@@ -14,7 +14,7 @@
     "skin_tone": "light neutral-cool",
     "skin_undertone": "cool pink",
     "eye_color": "green-grey",
-    "hair_color": null,
+    "hair_color": "ash brown medium length with natural waves",
     "season_type": "Cool Summer",
     "best_colors": [],
     "avoid_colors": [],
@@ -24,7 +24,7 @@
   },
   "skin": {
     "type": null,
-    "concerns": [],
+    "concerns": "rosacea around nose area, under-eye circles, sensitive skin",
     "sensitivities": []
   },
   "makeup": {
@@ -32,7 +32,9 @@
     "comfort_zones": [],
     "want_to_learn": [],
     "favorite_looks": [],
-    "daily_routine": null
+    "daily_routine": null,
+    "products_tried": "Maybelline Instant Age Rewind 05 Brightening (рожевий підтон), L'Oreal Color Riche Blurred Matte 601 Worth It",
+    "products_owned": "Maybelline Instant Age Rewind консилер 05 Brightening, L'Oreal Color Riche Blurred Matte помада 601 Worth It, Essence Make Me BROW eyebrow gel mascara 02 Browny Brows"
   },
   "products": {
     "owned": [],
@@ -55,5 +57,12 @@
     "looks_tried": [],
     "recommendations_given": [],
     "last_interaction": null
+  },
+  "estimated_age": "28-32",
+  "skin_analysis": {
+    "rosacea_signs": "persistent redness around nose, redness on cheeks, characteristic butterfly pattern, reaction to temperature/emotions"
+  },
+  "physical": {
+    "hair_type": "жирне пряме тонке рідке волосся слов'янського типу"
   }
 }

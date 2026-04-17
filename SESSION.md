@@ -1,13 +1,13 @@
-# SESSION — 2026-04-13 19:37
+# SESSION — 2026-04-17 17:48
 
 ## Проект
 garcia
 
 ## Що зробили
-fixed HEIC photo support in _paths_to_image_data: pillow-heif installed, convert HEIC/HEIF to JPEG before base64 encoding
+search_products тепер витягує прямі URL з web_search_tool_result блоків, промпт оновлено — Garcia завжди дає прямі посилання на товари
 
 ## Наступний крок
-no next step
+тест пошуку продуктів з прямими лінками, перевірити що URL коректні
 
 ## Контекст
-Anthropic API returns 400 on HEIC even with image/jpeg mime_type; solution: pillow_heif.register_heif_opener + PIL convert RGB + save to BytesIO as JPEG
+патчі готові але ще не застосовані — два python-скрипти для brain.py і base.py

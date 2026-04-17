@@ -139,7 +139,9 @@ TOOLS_SCHEMA = [
 
 
 def _web_search(query: str) -> str:
-    """Виконує web search через Anthropic API з tool_use."""
+    """Виконує web search через Anthropic API з tool_use.
+    Витягує URL з search_result блоків щоб Garcia могла давати прямі посилання.
+    """
     try:
         ai = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
         resp = ai.messages.create(
@@ -148,12 +150,24 @@ def _web_search(query: str) -> str:
             tools=[{"type": "web_search_20250305", "name": "web_search"}],
             messages=[{"role": "user", "content": f"Search the web and summarize findings: {query}"}],
         )
-        # Збираємо всі текстові блоки з відповіді
         texts = []
+        sources = []
         for block in resp.content:
-            if hasattr(block, "text"):
+            # Текстова відповідь Claude
+            if hasattr(block, "text") and block.text:
                 texts.append(block.text)
-        return "\\n".join(texts) if texts else "Нічого не знайдено."
+            # Web search results — витягуємо URL + title
+            if block.type == "web_search_tool_result":
+                for item in getattr(block, "content", []):
+                    if getattr(item, "type", None) == "web_search_result":
+                        url = getattr(item, "url", "")
+                        title = getattr(item, "title", "")
+                        if url:
+                            sources.append(f"- {title}: {url}")
+        result = "\\n".join(texts) if texts else "Нічого не знайдено."
+        if sources:
+            result += "\\n\\n📎 Джерела та посилання:\\n" + "\\n".join(sources[:8])
+        return result
     except Exception as e:
         logger.error(f"web_search error: {e}")
         return f"Помилка пошуку: {e}"

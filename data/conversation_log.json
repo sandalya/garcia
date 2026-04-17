@@ -73,5 +73,414 @@
     "cost_usd": 0.155784,
     "response_len": 828,
     "timestamp": "2026-04-13T19:46:45.451858"
+  },
+  {
+    "user_message": "\\nТак, знайди фото-приклади, будь ласка",
+    "has_photo": false,
+    "steps": 3,
+    "tools_used": [
+      "search_products",
+      "search_tutorials"
+    ],
+    "input_tokens": 73197,
+    "output_tokens": 2275,
+    "cost_usd": 0.253716,
+    "response_len": 882,
+    "timestamp": "2026-04-13T19:49:43.765952"
+  },
+  {
+    "user_message": "\\nТак",
+    "has_photo": false,
+    "steps": 1,
+    "tools_used": [
+      "fast_path"
+    ],
+    "input_tokens": 79610,
+    "output_tokens": 2787,
+    "cost_usd": 0.280635,
+    "response_len": 1276,
+    "timestamp": "2026-04-13T19:50:24.832321"
+  },
+  {
+    "user_message": "\\nI want you to help me create a prompt to help give me a makeover I want to glow up and look my absolute best, I'm gonna share a photo of myself with you and a prompt want you to help me write that p",
+    "has_photo": false,
+    "steps": 1,
+    "tools_used": [],
+    "input_tokens": 6116,
+    "output_tokens": 412,
+    "cost_usd": 0.024528,
+    "response_len": 867,
+    "timestamp": "2026-04-16T06:30:36.824501"
+  },
+  {
+    "user_message": "\\nСтвори два промпти, будь ласка:\n1) оцінка поточного стану шкіри, приблизний вік, повні рекомендації найкращого можливого  для мене образу (макіяж і зачіска) на щодень.\n2) для особливого випадку",
+    "has_photo": false,
+    "steps": 1,
+    "tools_used": [],
+    "input_tokens": 12734,
+    "output_tokens": 1267,
+    "cost_usd": 0.057207,
+    "response_len": 1827,
+    "timestamp": "2026-04-16T06:34:19.637875"
+  },
+  {
+    "user_message": "\\n\"Проаналізуй це фото для повного glow up аналізу. Потрібно:\n\nОЦІНКА ПОТОЧНОГО СТАНУ:\n- Стан шкіри (тон, текстура, проблемні зони, сяйво)\n- Приблизний вік\n- Поточний макіяж (що добре, що можна покращ",
+    "has_photo": true,
+    "steps": 2,
+    "tools_used": [
+      "analyze_photo"
+    ],
+    "input_tokens": 29808,
+    "output_tokens": 2452,
+    "cost_usd": 0.126204,
+    "response_len": 2241,
+    "timestamp": "2026-04-16T06:38:58.193961"
+  },
+  {
+    "user_message": "\\n\"Проаналізуй це фото для повного glow up аналізу. Потрібно:\n\nОЦІНКА ПОТОЧНОГО СТАНУ:\n- Стан шкіри (тон, текстура, проблемні зони, сяйво)\n- Приблизний вік\n- Поточний макіяж (що добре, що можна покращ",
+    "has_photo": true,
+    "steps": 2,
+    "tools_used": [
+      "analyze_photo"
+    ],
+    "input_tokens": 51252,
+    "output_tokens": 3615,
+    "cost_usd": 0.207981,
+    "response_len": 2209,
+    "timestamp": "2026-04-16T06:42:37.553920"
+  },
+  {
+    "user_message": "\\nТак, порекомендуй, будь ласка. Одразу з посиланнями де їх найдешевше придбати в Україні",
+    "has_photo": false,
+    "steps": 5,
+    "tools_used": [
+      "search_products",
+      "search_products",
+      "search_products",
+      "search_products"
+    ],
+    "input_tokens": 119026,
+    "output_tokens": 4727,
+    "cost_usd": 0.427983,
+    "response_len": 1570,
+    "timestamp": "2026-04-16T06:48:17.422157"
+  },
+  {
+    "user_message": "\\nЧи можу я додати ще декілька своїх фото щоб уточнити твій аналіз перед тим як іти далі?",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "analyze_photo"
+    ],
+    "input_tokens": 144540,
+    "output_tokens": 5136,
+    "cost_usd": 0.51066,
+    "response_len": 721,
+    "timestamp": "2026-04-16T07:19:06.727936"
+  },
+  {
+    "user_message": "Що скажеш про це фото?",
+    "has_photo": true,
+    "steps": 2,
+    "tools_used": [
+      "analyze_photo"
+    ],
+    "input_tokens": 261458,
+    "output_tokens": 5852,
+    "cost_usd": 0.872154,
+    "response_len": 1212,
+    "timestamp": "2026-04-16T07:22:25.085431"
+  },
+  {
+    "user_message": "Що скажеш про це фото?",
+    "has_photo": true,
+    "steps": 2,
+    "tools_used": [
+      "analyze_photo"
+    ],
+    "input_tokens": 301174,
+    "output_tokens": 6575,
+    "cost_usd": 1.002147,
+    "response_len": 1449,
+    "timestamp": "2026-04-16T07:22:31.361299"
+  },
+  {
+    "user_message": "\\nОнови свій висновок, будучи абсолютно чесною зі мною.\nНапиши, будь ласка, заново. Чесно",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "analyze_photo"
+    ],
+    "input_tokens": 383282,
+    "output_tokens": 7394,
+    "cost_usd": 1.260756,
+    "response_len": 1560,
+    "timestamp": "2026-04-16T07:34:59.872472"
+  },
+  {
+    "user_message": "\\nТак, готова!\nАле перед цим - проаналізуй мій стан шкіри детальніше, будь ласка. Загальний стан і також на предмет розацеа. Оціни вік. Порадь доглядові засоби.\nБудь абсолютно чесною.",
+    "has_photo": false,
+    "steps": 4,
+    "tools_used": [
+      "analyze_photo",
+      "update_profile",
+      "update_profile"
+    ],
+    "input_tokens": 551320,
+    "output_tokens": 8509,
+    "cost_usd": 1.781595,
+    "response_len": 1772,
+    "timestamp": "2026-04-16T07:54:11.926696"
+  },
+  {
+    "user_message": "\\nТак, готова інвестувати у правильний догляд",
+    "has_photo": false,
+    "steps": 7,
+    "tools_used": [
+      "search_products",
+      "update_profile"
+    ],
+    "input_tokens": 905944,
+    "output_tokens": 9981,
+    "cost_usd": 2.867547,
+    "response_len": 1833,
+    "timestamp": "2026-04-16T08:58:34.157805"
+  },
+  {
+    "user_message": "\\nпорадь мені топ 5 найкращий корейських SPF для шкіри з розацеа",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "search_products",
+      "update_profile"
+    ],
+    "input_tokens": 949356,
+    "output_tokens": 10796,
+    "cost_usd": 3.010008,
+    "response_len": 1701,
+    "timestamp": "2026-04-16T08:58:44.717834"
+  },
+  {
+    "user_message": "\\nдякую!\nпідкажи, з України корейську косметику краще замовляти через  jolse.com чи через yesstyle.com ?",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "search_products"
+    ],
+    "input_tokens": 1034769,
+    "output_tokens": 11535,
+    "cost_usd": 3.277332,
+    "response_len": 1287,
+    "timestamp": "2026-04-16T09:03:20.065801"
+  },
+  {
+    "user_message": "\\nКлас, дуже дякую!\nПо догляду я зрозуміла.\nДавай повернемося до макіяжу, будь ласка",
+    "has_photo": false,
+    "steps": 4,
+    "tools_used": [
+      "search_products",
+      "search_products",
+      "search_products"
+    ],
+    "input_tokens": 1203522,
+    "output_tokens": 12617,
+    "cost_usd": 3.799821,
+    "response_len": 1630,
+    "timestamp": "2026-04-16T09:20:44.406287"
+  },
+  {
+    "user_message": "\\nПорадь румʼяна, будь ласка",
+    "has_photo": false,
+    "steps": 3,
+    "tools_used": [
+      "analyze_photo"
+    ],
+    "input_tokens": 1365975,
+    "output_tokens": 13702,
+    "cost_usd": 4.303455,
+    "response_len": 1699,
+    "timestamp": "2026-04-16T09:36:39.063332"
+  },
+  {
+    "user_message": "\\nТа олівець для очей, мʼякий дуже стійкий",
+    "has_photo": false,
+    "steps": 4,
+    "tools_used": [
+      "analyze_photo",
+      "update_profile",
+      "update_profile"
+    ],
+    "input_tokens": 1488041,
+    "output_tokens": 15000,
+    "cost_usd": 4.689123,
+    "response_len": 0,
+    "timestamp": "2026-04-16T09:36:55.155081"
+  },
+  {
+    "user_message": "\\nПорадь олівець для очей, мʼякий та дуже стійкий",
+    "has_photo": false,
+    "steps": 1,
+    "tools_used": [],
+    "input_tokens": 1502751,
+    "output_tokens": 16071,
+    "cost_usd": 4.749318,
+    "response_len": 2099,
+    "timestamp": "2026-04-16T09:38:28.954086"
+  },
+  {
+    "user_message": "\\nя не можу знайти ті румяна, які ти мені радиш, а саме - NYX Sweet Cheeks Cream Blush \"Glow\" .\nТи могла би мені надіслати пряме посилання на сайт, де їх можна придбати в Україні? і ще раз напиши мій ",
+    "has_photo": false,
+    "steps": 4,
+    "tools_used": [
+      "search_products",
+      "search_products",
+      "search_products"
+    ],
+    "input_tokens": 1564440,
+    "output_tokens": 17046,
+    "cost_usd": 4.94901,
+    "response_len": 1382,
+    "timestamp": "2026-04-16T09:59:00.366060"
+  },
+  {
+    "user_message": "\\nТи рекомендувала мені зачіски. Можеш зробити фото колаж прикладів цих зачісок на інших людях, які найближчі до моєї зовнішності або підійдуть мені?",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "search_trends"
+    ],
+    "input_tokens": 1593797,
+    "output_tokens": 17903,
+    "cost_usd": 5.049936,
+    "response_len": 1538,
+    "timestamp": "2026-04-16T22:41:13.421187"
+  },
+  {
+    "user_message": "\\nЯкий шампунь може допомогти мені усунути жовтизну?",
+    "has_photo": false,
+    "steps": 1,
+    "tools_used": [],
+    "input_tokens": 1607936,
+    "output_tokens": 18830,
+    "cost_usd": 5.106258,
+    "response_len": 1895,
+    "timestamp": "2026-04-16T22:43:01.176922"
+  },
+  {
+    "user_message": "\\nУ мене жирне пряме тонке рідке волосся словʼянського типу",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "update_profile"
+    ],
+    "input_tokens": 1636450,
+    "output_tokens": 19739,
+    "cost_usd": 5.205435,
+    "response_len": 1506,
+    "timestamp": "2026-04-16T22:43:36.015455"
+  },
+  {
+    "user_message": "Що скажеш про це фото?",
+    "has_photo": true,
+    "steps": 2,
+    "tools_used": [
+      "analyze_photo"
+    ],
+    "input_tokens": 1666008,
+    "output_tokens": 20437,
+    "cost_usd": 5.304579,
+    "response_len": 1104,
+    "timestamp": "2026-04-16T22:47:42.884494"
+  },
+  {
+    "user_message": "\\nМожеш згенерувати для мене фото приклад такої трансформації?",
+    "has_photo": false,
+    "steps": 1,
+    "tools_used": [],
+    "input_tokens": 1680511,
+    "output_tokens": 20939,
+    "cost_usd": 5.355618,
+    "response_len": 1158,
+    "timestamp": "2026-04-16T22:47:57.620689"
+  },
+  {
+    "user_message": "\\nПривіт!\nСьогодні буду в магазині EVA. Що мені там обов’язково варто подивитись?",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "read_profile"
+    ],
+    "input_tokens": 1709820,
+    "output_tokens": 21658,
+    "cost_usd": 5.45433,
+    "response_len": 1264,
+    "timestamp": "2026-04-17T06:36:36.337946"
+  },
+  {
+    "user_message": "\\nСпробувала дещо з твоїх рекомендацій: ось фото, де у мене під очима Maybelline Instant Age Rewind - мій колір виявився 05 Brightening (з рожевим підтоном). Також тут у мене на губах помада color ric",
+    "has_photo": true,
+    "steps": 3,
+    "tools_used": [
+      "analyze_photo",
+      "update_profile"
+    ],
+    "input_tokens": 1757474,
+    "output_tokens": 22371,
+    "cost_usd": 5.607987,
+    "response_len": 1085,
+    "timestamp": "2026-04-17T12:36:02.822401"
+  },
+  {
+    "user_message": "\\nНе можу знайти Essence the blush 10 befitting.\nМаєш пряме посилання на цей товар в українському інтернет магазині? \nАбо краще порекомендуй мені кремову альтернативу",
+    "has_photo": false,
+    "steps": 3,
+    "tools_used": [
+      "search_products",
+      "search_products"
+    ],
+    "input_tokens": 1805880,
+    "output_tokens": 23210,
+    "cost_usd": 5.76579,
+    "response_len": 1411,
+    "timestamp": "2026-04-17T12:39:38.104818"
+  },
+  {
+    "user_message": "\\nОлівець NYX Micro Brow Pencil \"Ash Brown\" поки не знайшла, але придбала essence make me BROW eyebrow gel mascara у кольорі 02 - browny brows.\nТрохи пізніше надішлю фото",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "update_profile"
+    ],
+    "input_tokens": 1838485,
+    "output_tokens": 23872,
+    "cost_usd": 5.873535,
+    "response_len": 994,
+    "timestamp": "2026-04-17T13:51:59.641802"
+  },
+  {
+    "user_message": "Що скажеш про це фото?",
+    "has_photo": true,
+    "steps": 2,
+    "tools_used": [
+      "analyze_photo"
+    ],
+    "input_tokens": 1894086,
+    "output_tokens": 24495,
+    "cost_usd": 6.049683,
+    "response_len": 972,
+    "timestamp": "2026-04-17T15:49:09.101607"
+  },
+  {
+    "user_message": "\\nТут також стрілки зроблені eveline variete eyeliner 02 shiny brown",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "analyze_photo"
+    ],
+    "input_tokens": 1912231,
+    "output_tokens": 25084,
+    "cost_usd": 6.112953,
+    "response_len": 1169,
+    "timestamp": "2026-04-17T15:49:21.074245"
   }
 ]
