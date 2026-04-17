@@ -482,5 +482,83 @@
     "cost_usd": 6.112953,
     "response_len": 1169,
     "timestamp": "2026-04-17T15:49:21.074245"
+  },
+  {
+    "user_message": "Порадь кремові рум'яна для Cool Summer колориту",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "search_products"
+    ],
+    "input_tokens": 14598,
+    "output_tokens": 625,
+    "cost_usd": 0.053169,
+    "response_len": 1079,
+    "timestamp": "2026-04-18T00:37:47.071843"
+  },
+  {
+    "user_message": "Де купити тональний крем в Україні?",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "search_products"
+    ],
+    "input_tokens": 30117,
+    "output_tokens": 1153,
+    "cost_usd": 0.107646,
+    "response_len": 951,
+    "timestamp": "2026-04-18T00:38:48.332543"
+  },
+  {
+    "user_message": "Порадь кремові рум'яна для Cool Summer колориту",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "search_products"
+    ],
+    "input_tokens": 14610,
+    "output_tokens": 668,
+    "cost_usd": 0.05385,
+    "response_len": 1167,
+    "timestamp": "2026-04-18T00:41:31.711887"
+  },
+  {
+    "user_message": "Де купити тональний крем в Україні?",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "search_products"
+    ],
+    "input_tokens": 30214,
+    "output_tokens": 1320,
+    "cost_usd": 0.110442,
+    "response_len": 1305,
+    "timestamp": "2026-04-18T00:42:30.210955"
+  },
+  {
+    "user_message": "Порадь кремові рум'яна для Cool Summer колориту",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "search_products"
+    ],
+    "input_tokens": 14760,
+    "output_tokens": 717,
+    "cost_usd": 0.055035,
+    "response_len": 1348,
+    "timestamp": "2026-04-18T00:45:13.624030"
+  },
+  {
+    "user_message": "Де купити тональний крем в Україні?",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "search_products"
+    ],
+    "input_tokens": 30631,
+    "output_tokens": 1410,
+    "cost_usd": 0.113043,
+    "response_len": 1381,
+    "timestamp": "2026-04-18T00:46:14.898835"
   }
 ]

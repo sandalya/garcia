@@ -164,9 +164,10 @@ def _web_search(query: str) -> str:
                         title = getattr(item, "title", "")
                         if url:
                             sources.append(f"- {title}: {url}")
-        result = "\\n".join(texts) if texts else "Нічого не знайдено."
+        result = "\n".join(texts) if texts else "Нічого не знайдено."
         if sources:
-            result += "\\n\\n📎 Джерела та посилання:\\n" + "\\n".join(sources[:8])
+            result += "\n\n📎 Джерела та посилання:\n" + "\n".join(sources[:8])
+            result += "\n\n⚠️ ОБОВ'ЯЗКОВО використай URL з цього списку у своїй відповіді Ксю. НЕ пиши просто назву магазину — дай клікабельне посилання [назва](url)."
         return result
     except Exception as e:
         logger.error(f"web_search error: {e}")
@@ -219,7 +220,7 @@ def _read_pinterest() -> str:
 def _execute_tool(name: str, input_data: dict, images: list = None) -> str:
     """Виконує tool і повертає результат як текст."""
     if name == "search_products":
-        return _web_search(input_data["query"] + " review quality long-lasting doesn't crease")
+        return _web_search(input_data["query"] + " купити Україна ціна відгуки")
     elif name == "search_tutorials":
         return _web_search(input_data["query"])
     elif name == "search_trends":
