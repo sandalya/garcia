@@ -13,18 +13,21 @@
   "color_analysis": {
     "skin_tone": "light neutral-cool",
     "skin_undertone": "cool pink",
-    "eye_color": "green-grey",
+    "eye_color": "green-grey hazel with warm bronze in the middle",
     "hair_color": "ash brown medium length with natural waves",
-    "season_type": "Cool Summer",
+    "season_type": "Soft Summer (low contrast + cool + muted) - confirmed by draping test",
     "best_colors": [],
     "avoid_colors": [],
     "analyzed_at": null,
     "photo_ref": null,
-    "seasonal_type": "Light Summer"
+    "seasonal_type": "Soft Summer (previously thought Cool Summer)",
+    "hair_texture": "naturally straight",
+    "season": "Soft Summer (cool skin with warm eye undertones - muted palette)",
+    "eye_details": "green-grey hazel with warm bronze around iris"
   },
   "skin": {
     "type": null,
-    "concerns": "rosacea around nose area, under-eye circles, sensitive skin",
+    "concerns": "rosacea around nose area, under-eye circles, sensitive skin, pigmentation spots",
     "sensitivities": []
   },
   "makeup": {
@@ -64,5 +67,8 @@
   },
   "physical": {
     "hair_type": "жирне пряме тонке рідке волосся слов'янського типу"
+  },
+  "skincare": {
+    "evening_routine": "Uses azelaic acid + retinol together in evening routine with proper wait times (30-60 min between azelaic and retinol, 10-30 min before moisturizer). Previously alternated them but skin tolerates combination well. Products: Bioderma oil cleanser, CeraVe hydrating cleanser, azelaic acid 10%, CeraVe retinol serum, CeraVe moisturizing cream"
   }
 }

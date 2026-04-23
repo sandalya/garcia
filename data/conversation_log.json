@@ -560,5 +560,724 @@
     "cost_usd": 0.113043,
     "response_len": 1381,
     "timestamp": "2026-04-18T00:46:14.898835"
+  },
+  {
+    "user_message": "\\nчи зможеш ти мені згенерувати ось таку картинку із моїми доглядовими засобами, якщо я надішлю тобі іх фото, на якому вони будуть розташовані зліва направо в порядку їх застосування?",
+    "has_photo": true,
+    "steps": 1,
+    "tools_used": [],
+    "input_tokens": 7851,
+    "output_tokens": 372,
+    "cost_usd": 0.029133,
+    "response_len": 802,
+    "timestamp": "2026-04-18T09:20:49.121348"
+  },
+  {
+    "user_message": "\\nЦе ранковий догляд. Перед його нанесенням вмиваюсь просто водою.",
+    "has_photo": true,
+    "steps": 2,
+    "tools_used": [
+      "analyze_photo"
+    ],
+    "input_tokens": 27595,
+    "output_tokens": 921,
+    "cost_usd": 0.0966,
+    "response_len": 1039,
+    "timestamp": "2026-04-18T09:23:47.883523"
+  },
+  {
+    "user_message": "\\nПісля цього - спф, якийсь один. Зараз маю ось такі в ротаціі",
+    "has_photo": true,
+    "steps": 2,
+    "tools_used": [
+      "analyze_photo"
+    ],
+    "input_tokens": 51539,
+    "output_tokens": 1434,
+    "cost_usd": 0.176127,
+    "response_len": 957,
+    "timestamp": "2026-04-18T09:24:11.096585"
+  },
+  {
+    "user_message": "\\nЦе вечірній догляд: спочатку двухфазне очищення двома першими засобами. Потім азедаїнова кислота. Потім пауза 30-60 хвилин. Потім мʼякий ретинол (тільки місяць як користуюсь ним, подобається). Потім",
+    "has_photo": true,
+    "steps": 2,
+    "tools_used": [
+      "analyze_photo"
+    ],
+    "input_tokens": 79135,
+    "output_tokens": 1985,
+    "cost_usd": 0.26718,
+    "response_len": 967,
+    "timestamp": "2026-04-18T09:28:45.856370"
+  },
+  {
+    "user_message": "\\nРаніше я використовувала саме так: один вечір азелаїнова, наступний вечір - ретинол. Шкіра реагує добре, вирішила спробувати поєднати. Шкіра реагує добре.",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "update_profile"
+    ],
+    "input_tokens": 107992,
+    "output_tokens": 2533,
+    "cost_usd": 0.361971,
+    "response_len": 739,
+    "timestamp": "2026-04-18T09:31:15.084448"
+  },
+  {
+    "user_message": "\\nБачу покращення текстури і трохи сяйва, проте пігментні плями все ще не сходять. Мені хотілося б їх позбавитись. На рожеві плями рутина ніяк не впливає. Щось додати для них?",
+    "has_photo": false,
+    "steps": 5,
+    "tools_used": [
+      "read_profile",
+      "update_profile",
+      "search_products",
+      "search_products"
+    ],
+    "input_tokens": 189401,
+    "output_tokens": 3344,
+    "cost_usd": 0.618363,
+    "response_len": 1104,
+    "timestamp": "2026-04-18T09:35:25.421612"
+  },
+  {
+    "user_message": "\\nСпробую cos de baha tranexamic",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "search_products"
+    ],
+    "input_tokens": 236914,
+    "output_tokens": 4044,
+    "cost_usd": 0.771402,
+    "response_len": 1090,
+    "timestamp": "2026-04-18T09:40:07.284314"
+  },
+  {
+    "user_message": "\\nДопоможи сформувати промпт для Еббі, щоб вона зробила мені таку картинку із засобами моєї рутини?",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "search_products"
+    ],
+    "input_tokens": 253624,
+    "output_tokens": 4688,
+    "cost_usd": 0.831192,
+    "response_len": 1257,
+    "timestamp": "2026-04-18T09:40:51.541123"
+  },
+  {
+    "user_message": "\\nПроаналізуй charlotte tilbury pillow talk fair для мене, пліз",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "search_products"
+    ],
+    "input_tokens": 288074,
+    "output_tokens": 5283,
+    "cost_usd": 0.943467,
+    "response_len": 1111,
+    "timestamp": "2026-04-18T13:34:51.489334"
+  },
+  {
+    "user_message": "\\nЧи не занадто вона світла для мене ? \nПроаналізуй також pat mcgrath veiled rose, mac lustreglass lipstick syrup та sephora collection about that shine lacquer shine lipstick 02 soft frequency.\nПорів",
+    "has_photo": false,
+    "steps": 4,
+    "tools_used": [
+      "search_products",
+      "search_products",
+      "search_products"
+    ],
+    "input_tokens": 364317,
+    "output_tokens": 6386,
+    "cost_usd": 1.188741,
+    "response_len": 2026,
+    "timestamp": "2026-04-18T13:41:00.732442"
+  },
+  {
+    "user_message": "\\nА де мені її найкраще купити?",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "search_products"
+    ],
+    "input_tokens": 399550,
+    "output_tokens": 7036,
+    "cost_usd": 1.30419,
+    "response_len": 1244,
+    "timestamp": "2026-04-18T13:42:52.004250"
+  },
+  {
+    "user_message": "\\nЧи можеш ти створити колаж із зображеннями і інтернету, де використана помада pat mcgrath veiled rose на людині, яка схожа на мій кольоротип",
+    "has_photo": false,
+    "steps": 1,
+    "tools_used": [],
+    "input_tokens": 415208,
+    "output_tokens": 7377,
+    "cost_usd": 1.356279,
+    "response_len": 790,
+    "timestamp": "2026-04-18T13:47:45.913286"
+  },
+  {
+    "user_message": "\\nТак, згенеруй промпт для Еббі окремим повідомленням, будь ласка, щоб мені зручніше було копіювати потім",
+    "has_photo": false,
+    "steps": 1,
+    "tools_used": [],
+    "input_tokens": 429159,
+    "output_tokens": 7683,
+    "cost_usd": 1.402722,
+    "response_len": 736,
+    "timestamp": "2026-04-18T13:49:03.394006"
+  },
+  {
+    "user_message": "\\nПоправ свою інформацію про мене: моє волосся від природи абсолютно пряме. Очі - green-grey hazel with warm bronze in the middle",
+    "has_photo": false,
+    "steps": 3,
+    "tools_used": [
+      "update_profile",
+      "update_profile"
+    ],
+    "input_tokens": 466925,
+    "output_tokens": 8119,
+    "cost_usd": 1.52256,
+    "response_len": 637,
+    "timestamp": "2026-04-18T13:51:54.181500"
+  },
+  {
+    "user_message": "\\nТак",
+    "has_photo": false,
+    "steps": 1,
+    "tools_used": [
+      "fast_path"
+    ],
+    "input_tokens": 475938,
+    "output_tokens": 8432,
+    "cost_usd": 1.554294,
+    "response_len": 772,
+    "timestamp": "2026-04-18T13:52:33.740568"
+  },
+  {
+    "user_message": "\\nДякую! Чи є у Pat McGrath якісь інші продукти, які теж так чудово підходять мені, як помада Veiled rose?",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "search_products"
+    ],
+    "input_tokens": 501262,
+    "output_tokens": 9058,
+    "cost_usd": 1.639656,
+    "response_len": 1293,
+    "timestamp": "2026-04-18T14:03:23.549558"
+  },
+  {
+    "user_message": "\\nПроаналізуй чи підійде мені, пліз",
+    "has_photo": true,
+    "steps": 2,
+    "tools_used": [
+      "search_products"
+    ],
+    "input_tokens": 529150,
+    "output_tokens": 9767,
+    "cost_usd": 1.733955,
+    "response_len": 1462,
+    "timestamp": "2026-04-18T14:09:42.789328"
+  },
+  {
+    "user_message": "\\nНадішли мені, пліз, посилання на зображення, де найкраще показано ідеальний плейсмент рум’ян для мене",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "search_tutorials"
+    ],
+    "input_tokens": 557323,
+    "output_tokens": 10369,
+    "cost_usd": 1.827504,
+    "response_len": 1298,
+    "timestamp": "2026-04-18T14:13:01.689751"
+  },
+  {
+    "user_message": "\\nЯка у мене форма обличчя? Будь абсолютно чесною",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "read_profile"
+    ],
+    "input_tokens": 584952,
+    "output_tokens": 10798,
+    "cost_usd": 1.916826,
+    "response_len": 780,
+    "timestamp": "2026-04-18T14:14:53.788345"
+  },
+  {
+    "user_message": "\\nЯка у мене форма обличчя? Будь абсолютно чесною",
+    "has_photo": true,
+    "steps": 2,
+    "tools_used": [
+      "analyze_photo"
+    ],
+    "input_tokens": 614510,
+    "output_tokens": 11291,
+    "cost_usd": 2.012895,
+    "response_len": 893,
+    "timestamp": "2026-04-18T14:16:14.181755"
+  },
+  {
+    "user_message": "\\nПроаналізуй чи підійде мені, пліз",
+    "has_photo": true,
+    "steps": 2,
+    "tools_used": [
+      "search_products"
+    ],
+    "input_tokens": 647380,
+    "output_tokens": 11934,
+    "cost_usd": 2.12115,
+    "response_len": 1250,
+    "timestamp": "2026-04-18T14:19:15.119441"
+  },
+  {
+    "user_message": "\\nЯкі рум’яна рекомендують в парі з помадою Pat McGrath Veiled rose для такої шкіри, як у мене?",
+    "has_photo": false,
+    "steps": 3,
+    "tools_used": [
+      "search_products",
+      "search_products"
+    ],
+    "input_tokens": 698478,
+    "output_tokens": 12647,
+    "cost_usd": 2.285139,
+    "response_len": 1377,
+    "timestamp": "2026-04-18T14:27:34.587362"
+  },
+  {
+    "user_message": "\\nЩо краще для мене - Divine blush чи Focallure?",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "search_products"
+    ],
+    "input_tokens": 731657,
+    "output_tokens": 13320,
+    "cost_usd": 2.394771,
+    "response_len": 1452,
+    "timestamp": "2026-04-18T14:31:02.312105"
+  },
+  {
+    "user_message": "\\nЯкий олівець для губ рекомендують в парі з помадою Pat McGrath Veiled rose для такої шкіри, як у мене?",
+    "has_photo": false,
+    "steps": 5,
+    "tools_used": [
+      "search_products",
+      "search_products",
+      "search_products",
+      "search_products"
+    ],
+    "input_tokens": 824752,
+    "output_tokens": 14216,
+    "cost_usd": 2.687496,
+    "response_len": 1465,
+    "timestamp": "2026-04-18T14:42:24.285522"
+  },
+  {
+    "user_message": "\\nДе я можу купити одночасно Pat McGrath Veiled rose та Pat McGrath Divine Blush divine rose?",
+    "has_photo": false,
+    "steps": 3,
+    "tools_used": [
+      "search_products",
+      "search_products"
+    ],
+    "input_tokens": 877538,
+    "output_tokens": 14889,
+    "cost_usd": 2.855949,
+    "response_len": 1245,
+    "timestamp": "2026-04-18T14:54:42.425554"
+  },
+  {
+    "user_message": "\\nЩо думаєш про ilia mascara before dawn для мене? Чи є бюджетніші ash brown альтернативи?",
+    "has_photo": false,
+    "steps": 3,
+    "tools_used": [
+      "search_products",
+      "search_products"
+    ],
+    "input_tokens": 931808,
+    "output_tokens": 15759,
+    "cost_usd": 3.031809,
+    "response_len": 1756,
+    "timestamp": "2026-04-18T22:08:38.687334"
+  },
+  {
+    "user_message": "\\nTelescopic lift у якому кольорі? Де краще купити?",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "search_products"
+    ],
+    "input_tokens": 964807,
+    "output_tokens": 16439,
+    "cost_usd": 3.141006,
+    "response_len": 1247,
+    "timestamp": "2026-04-18T22:12:42.392646"
+  },
+  {
+    "user_message": "\\nДопоможи знайти тіні та рідку підводку у кольорі як ilia mascara before dawn",
+    "has_photo": false,
+    "steps": 3,
+    "tools_used": [
+      "search_products",
+      "search_products"
+    ],
+    "input_tokens": 1015702,
+    "output_tokens": 17282,
+    "cost_usd": 3.306336,
+    "response_len": 1626,
+    "timestamp": "2026-04-18T22:23:50.828446"
+  },
+  {
+    "user_message": "\\nЯ шукаю холодний коричневий, а саме ash brown",
+    "has_photo": false,
+    "steps": 3,
+    "tools_used": [
+      "search_products",
+      "search_products"
+    ],
+    "input_tokens": 1067440,
+    "output_tokens": 18130,
+    "cost_usd": 3.47427,
+    "response_len": 1622,
+    "timestamp": "2026-04-18T22:26:58.758884"
+  },
+  {
+    "user_message": "\\nУ мене точно rosy cool undertone? Не olive?",
+    "has_photo": true,
+    "steps": 2,
+    "tools_used": [
+      "analyze_photo"
+    ],
+    "input_tokens": 1098848,
+    "output_tokens": 18696,
+    "cost_usd": 3.576984,
+    "response_len": 1097,
+    "timestamp": "2026-04-18T22:39:19.706217"
+  },
+  {
+    "user_message": "\\nОсь ще фото для аналізу",
+    "has_photo": true,
+    "steps": 2,
+    "tools_used": [
+      "analyze_photo"
+    ],
+    "input_tokens": 1142002,
+    "output_tokens": 19269,
+    "cost_usd": 3.715041,
+    "response_len": 1106,
+    "timestamp": "2026-04-18T22:43:24.498448"
+  },
+  {
+    "user_message": "\\nДопоможи знайти ідеальний skin tint для мене, бажано spf 50. Не дуже блискучий, не дуже матовий. Я шукаю не full coverage, я шукаю легкий природній результат, який добре тримається,doesn’t pill і га",
+    "has_photo": false,
+    "steps": 4,
+    "tools_used": [
+      "search_products",
+      "search_products",
+      "search_products"
+    ],
+    "input_tokens": 1236533,
+    "output_tokens": 20313,
+    "cost_usd": 4.014294,
+    "response_len": 1806,
+    "timestamp": "2026-04-19T06:54:07.141462"
+  },
+  {
+    "user_message": "\\nУ мене cool undertone skin, але hazel green greyish eyes with warm dark orange.\nCan I be a soft summer?",
+    "has_photo": false,
+    "steps": 3,
+    "tools_used": [
+      "analyze_photo",
+      "update_profile"
+    ],
+    "input_tokens": 1302632,
+    "output_tokens": 20939,
+    "cost_usd": 4.221981,
+    "response_len": 0,
+    "timestamp": "2026-04-19T10:48:40.395011"
+  },
+  {
+    "user_message": "\\nI have a cool undertone skin, but hazel green greyish eyes with warm dark orange cooor around the iris.\nCan my color palette be a soft summer instead of cool summer?",
+    "has_photo": false,
+    "steps": 3,
+    "tools_used": [
+      "analyze_photo",
+      "update_profile"
+    ],
+    "input_tokens": 1367049,
+    "output_tokens": 21673,
+    "cost_usd": 4.426242,
+    "response_len": 0,
+    "timestamp": "2026-04-19T10:50:12.173280"
+  },
+  {
+    "user_message": "\\nI have a cool undertone skin, but hazel green greyish eyes with warm dark orange cooor around the iris.\nCan my color palette be a soft summer instead of cool summer?",
+    "has_photo": true,
+    "steps": 3,
+    "tools_used": [
+      "analyze_photo",
+      "update_profile"
+    ],
+    "input_tokens": 1432671,
+    "output_tokens": 22398,
+    "cost_usd": 4.633983,
+    "response_len": 0,
+    "timestamp": "2026-04-19T10:51:18.326104"
+  },
+  {
+    "user_message": "\\nУ мене шкіра з холодним підтоном. Але мої очі мають теплий колір (сіро-зелені з бронзовим навколо зрачка).\nЧи може мій колірний тип (кольоровий аналіз) бути “soft summer”?",
+    "has_photo": false,
+    "steps": 3,
+    "tools_used": [
+      "analyze_photo",
+      "update_profile"
+    ],
+    "input_tokens": 1496296,
+    "output_tokens": 23124,
+    "cost_usd": 4.835748,
+    "response_len": 1265,
+    "timestamp": "2026-04-19T10:53:12.276003"
+  },
+  {
+    "user_message": "\\nЯка ідеальна помада? Щоб виглядало натурально, але краще",
+    "has_photo": false,
+    "steps": 3,
+    "tools_used": [
+      "search_products",
+      "update_profile"
+    ],
+    "input_tokens": 1561861,
+    "output_tokens": 23980,
+    "cost_usd": 5.045283,
+    "response_len": 1568,
+    "timestamp": "2026-04-19T10:57:07.851077"
+  },
+  {
+    "user_message": "\\nЩо думаєш про це для мене?",
+    "has_photo": true,
+    "steps": 3,
+    "tools_used": [
+      "analyze_photo",
+      "update_profile"
+    ],
+    "input_tokens": 1628863,
+    "output_tokens": 24677,
+    "cost_usd": 5.256744,
+    "response_len": 1055,
+    "timestamp": "2026-04-19T13:06:34.922106"
+  },
+  {
+    "user_message": "\\nЩо думаєш про це для мене?",
+    "has_photo": true,
+    "steps": 2,
+    "tools_used": [
+      "search_products"
+    ],
+    "input_tokens": 1676605,
+    "output_tokens": 25397,
+    "cost_usd": 5.41077,
+    "response_len": 1388,
+    "timestamp": "2026-04-19T13:09:59.596795"
+  },
+  {
+    "user_message": "\\nЩо думаєш про це для мене?",
+    "has_photo": true,
+    "steps": 2,
+    "tools_used": [
+      "update_profile"
+    ],
+    "input_tokens": 1722828,
+    "output_tokens": 26046,
+    "cost_usd": 5.559174,
+    "response_len": 1179,
+    "timestamp": "2026-04-19T13:17:40.823492"
+  },
+  {
+    "user_message": "\\nПерероби цей промпт з новою інформацією для мене, будь ласка.",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "read_profile"
+    ],
+    "input_tokens": 14539,
+    "output_tokens": 693,
+    "cost_usd": 0.054012,
+    "response_len": 1435,
+    "timestamp": "2026-04-19T14:46:37.426189"
+  },
+  {
+    "user_message": "\\nЧи може мій кольоротип бути true spring?",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "read_profile"
+    ],
+    "input_tokens": 30276,
+    "output_tokens": 1120,
+    "cost_usd": 0.107628,
+    "response_len": 977,
+    "timestamp": "2026-04-20T10:47:48.927851"
+  },
+  {
+    "user_message": "\\nя зробила фото при природному освітленні з різними відтінками тканини біля обличчя.\nПроаналізуй як вони впливають на мою шкіру.\nЯкий все ж таки у мене кольоротип?",
+    "has_photo": true,
+    "steps": 3,
+    "tools_used": [
+      "analyze_photo",
+      "update_profile"
+    ],
+    "input_tokens": 59287,
+    "output_tokens": 1774,
+    "cost_usd": 0.204471,
+    "response_len": 48,
+    "timestamp": "2026-04-20T12:12:10.000590"
+  },
+  {
+    "user_message": "\\nвиходячи з того, що я ow contrast + cool + muted summer онови свої поради по макіяжу і одягу, пліз",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "update_profile"
+    ],
+    "input_tokens": 78355,
+    "output_tokens": 2333,
+    "cost_usd": 0.27006,
+    "response_len": 1072,
+    "timestamp": "2026-04-20T12:29:07.011369"
+  },
+  {
+    "user_message": "\\nтут?",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "analyze_photo"
+    ],
+    "input_tokens": 98357,
+    "output_tokens": 2798,
+    "cost_usd": 0.337041,
+    "response_len": 824,
+    "timestamp": "2026-04-20T13:00:06.942988"
+  },
+  {
+    "user_message": "\\nЧи пасуватиме мені мідно руде волосся?",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "read_profile"
+    ],
+    "input_tokens": 120075,
+    "output_tokens": 3255,
+    "cost_usd": 0.40905,
+    "response_len": 978,
+    "timestamp": "2026-04-20T17:08:10.504167"
+  },
+  {
+    "user_message": "\\nТут у мене на губах олівець Charlotte Tilbury Pillowtalk Fair. Тільки олівець є, без помади. Як тобі? Чи є у Tilbury трохи холодніший колір олівця?",
+    "has_photo": true,
+    "steps": 3,
+    "tools_used": [
+      "analyze_photo",
+      "search_products"
+    ],
+    "input_tokens": 158790,
+    "output_tokens": 3838,
+    "cost_usd": 0.53394,
+    "response_len": 903,
+    "timestamp": "2026-04-20T19:05:09.999645"
+  },
+  {
+    "user_message": "\\nЩо думаєш про Олівець для губ Charlotte Tilbury Lip Cheat Contour Duo Lip Liner (Fair)?",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "search_products"
+    ],
+    "input_tokens": 185878,
+    "output_tokens": 4348,
+    "cost_usd": 0.622854,
+    "response_len": 1014,
+    "timestamp": "2026-04-20T19:08:50.421318"
+  },
+  {
+    "user_message": "\\nДопоможи знайти ось такий відтінок помади чи бальзаму для губ",
+    "has_photo": true,
+    "steps": 3,
+    "tools_used": [
+      "search_products",
+      "search_products"
+    ],
+    "input_tokens": 232622,
+    "output_tokens": 5002,
+    "cost_usd": 0.772896,
+    "response_len": 1068,
+    "timestamp": "2026-04-20T19:55:27.674158"
+  },
+  {
+    "user_message": "\\nДопоможи знайти декілька конкретних брендів і відтінків таких помад",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "search_products"
+    ],
+    "input_tokens": 263617,
+    "output_tokens": 5673,
+    "cost_usd": 0.875946,
+    "response_len": 1329,
+    "timestamp": "2026-04-20T20:01:00.795287"
+  },
+  {
+    "user_message": "\\nНа цьому фото у мене на губах  олівець Charlotte Tilbury Pillowtalk Fair і  рум'яна Pat McGrath Divine Blush у кольорі divine rose",
+    "has_photo": true,
+    "steps": 2,
+    "tools_used": [
+      "analyze_photo"
+    ],
+    "input_tokens": 316845,
+    "output_tokens": 6213,
+    "cost_usd": 1.04373,
+    "response_len": 918,
+    "timestamp": "2026-04-21T10:15:28.221166"
+  },
+  {
+    "user_message": "\\nНа цьому фото у мене на губах лише олівець Charlotte Tilbury Pillowtalk Fair. Тільки олівець, без помади і без рум'ян.",
+    "has_photo": true,
+    "steps": 2,
+    "tools_used": [],
+    "input_tokens": 335328,
+    "output_tokens": 6659,
+    "cost_usd": 1.105869,
+    "response_len": 1029,
+    "timestamp": "2026-04-21T10:15:31.222273"
+  },
+  {
+    "user_message": "\\nЩо скажеш про рум'яна Pat McGrath Divine Blush у кольорі divine rose для мене? Колір? Розташування?",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "search_products"
+    ],
+    "input_tokens": 372706,
+    "output_tokens": 7170,
+    "cost_usd": 1.225668,
+    "response_len": 1004,
+    "timestamp": "2026-04-21T10:16:15.069753"
+  },
+  {
+    "user_message": "\\nЩо думаєш про sephora contour fair to light для мене?",
+    "has_photo": false,
+    "steps": 2,
+    "tools_used": [
+      "search_products"
+    ],
+    "input_tokens": 408550,
+    "output_tokens": 7762,
+    "cost_usd": 1.34208,
+    "response_len": 1311,
+    "timestamp": "2026-04-21T10:31:43.331936"
   }
 ]
